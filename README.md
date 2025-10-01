@@ -122,7 +122,7 @@ All API endpoints require authentication using a **Bearer Token**.
 2. Run the following inside Tinker:
 
    ```php
-   $user = App\Models\User::where('email', 'admin@example.com')->first();
+   $user = App\Models\User::where('email', 'owner@example.com')->first();
    $token = $user->createToken('dev-token');
    echo $token->plainTextToken;
    ```

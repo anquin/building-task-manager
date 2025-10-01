@@ -175,7 +175,7 @@ class TaskController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="status", type="string", example="closed"),
+     *             @OA\Property(property="status", type="string", example="in_progress"),
      *             @OA\Property(property="assignee", type="string", example="uuid")
      *         )
      *     ),
