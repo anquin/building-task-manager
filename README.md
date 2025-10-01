@@ -171,14 +171,15 @@ docker exec -it laravel_app php artisan test
 ## 📦 Useful Commands
 
 | Task                      | Command                                                                 |
-|---------------------------|-------------------------------------------------------------------------|
-| Run migrations            | `docker exec -it laravel_app php artisan migrate`                       |
-| Run seeders               | `docker exec -it laravel_app php artisan db:seed`                       |
-| Access Laravel Tinker     | `docker exec -it laravel_app php artisan tinker`                        |
-| Generate Swagger docs     | `docker exec -it laravel_app php artisan l5-swagger:generate`           |
-| Rebuild containers        | `docker-compose up -d --build`                                          |
-| Stop containers           | `docker-compose down`                                                   |
-| Enter app container shell | `docker exec -it laravel_app bash`                                      |
+|------------------------------------|-------------------------------------------------------------------------|
+| Run migrations                     | `docker exec -it laravel_app php artisan migrate`                       |
+| Run seeders                        | `docker exec -it laravel_app php artisan db:seed`                       |
+| Access Laravel Tinker              | `docker exec -it laravel_app php artisan tinker`                        |
+| Generate Swagger docs              | `docker exec -it laravel_app php artisan l5-swagger:generate`           |
+| Rebuild containers                 | `docker-compose up -d --build`                                          |
+| Stop containers                    | `docker-compose down`                                                   |
+| Stop containers and remove volumes | `docker-compose down --volumes --remove-orphan`                         |
+| Enter app container shell          | `docker exec -it laravel_app bash`                                      |
 
 ---
 
