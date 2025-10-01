@@ -1,0 +1,368 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/tasks": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "List all tasks",
+                "operationId": "be68905d866e856db6c738172b8d929a",
+                "parameters": [
+                    {
+                        "name": "assignee",
+                        "in": "query",
+                        "description": "Filter by assignee user ID",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "date_from",
+                        "in": "query",
+                        "description": "Start date for filtering (YYYY-MM-DD)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "date_to",
+                        "in": "query",
+                        "description": "End date for filtering (YYYY-MM-DD)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of tasks",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Task"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Create a new task",
+                "operationId": "ebbaabc58e3db61374a57c53544959b2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "building_id",
+                                    "summary"
+                                ],
+                                "properties": {
+                                    "building_id": {
+                                        "type": "string",
+                                        "example": "uuid"
+                                    },
+                                    "summary": {
+                                        "type": "string",
+                                        "example": "Fix the lights in hallway"
+                                    },
+                                    "assignee": {
+                                        "type": "string",
+                                        "example": "uuid"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Task created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/tasks/{id}": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Retrieve a task by ID",
+                "operationId": "32c40e2d1129b80c1dcabd538df63a33",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID of the task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Task found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Task not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Delete a task",
+                "operationId": "d81cc7975ea62176b4ef8f74ed95168d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Task deleted"
+                    },
+                    "404": {
+                        "description": "Task not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Update a task",
+                "operationId": "45c4ee8c6fbf4c013b04823a0c105379",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": "closed"
+                                    },
+                                    "assignee": {
+                                        "type": "string",
+                                        "example": "uuid"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Task updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/tasks/{id}/comments": {
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Add a comment to a task",
+                "operationId": "e9fbb692f5c29a4018883504f672a30d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID of the task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "text"
+                                ],
+                                "properties": {
+                                    "text": {
+                                        "type": "string",
+                                        "example": "Please check the issue before closing."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comment added to task",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Task": {
+                "title": "Task",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "2d617157-e8bf-430e-8cbf-671ef680320a"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "example": "Brief Task Description"
+                    },
+                    "creator": {
+                        "type": "string",
+                        "example": "3ed50d5b-7715-4c4d-b5e2-624786e98aac"
+                    },
+                    "assignee": {
+                        "type": "string",
+                        "example": "3ed50d5b-7715-4c4d-b5e2-624786e98aac"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "open"
+                    },
+                    "comments": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "user_id": {
+                                    "type": "string",
+                                    "example": "uuid"
+                                },
+                                "text": {
+                                    "type": "string",
+                                    "example": "Nice job!"
+                                },
+                                "timestamp": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Tasks",
+            "description": "Tasks"
+        }
+    ]
+}
