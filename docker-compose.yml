@@ -17,7 +17,6 @@ services:
   webserver:
     image: nginx:latest
     container_name: laravel_nginx
-    # network_mode: host
     ports:
       - "8000:80"
     volumes:
@@ -32,7 +31,6 @@ services:
     image: postgres:15
     container_name: laravel_db
     restart: unless-stopped
-    # network_mode: host
     environment:
       POSTGRES_DB: laravel
       POSTGRES_USER: laravel
@@ -50,7 +48,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ./html
+      device: ./src
   dbdata:
 
 networks:

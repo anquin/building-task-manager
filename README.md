@@ -37,7 +37,7 @@ On the first run, `php-fpm` will fail to start. This is expected, as the Laravel
 
 1. Copy the example `.env` file:
    ```bash
-   cp html/.env.example html/.env
+   cp src/.env.example src/.env
    ```
 
 2. Install Composer dependencies:
@@ -63,9 +63,9 @@ On the first run, `php-fpm` will fail to start. This is expected, as the Laravel
 6. Change runtime directories permissions:
 
    ```bash
-   find html/storage/ -type d -exec chmod 777 {} +
-   find html/bootstrap/cache -type d -exec chmod 777 {} +
-   find html/database/ -type d -exec chmod 777 {} +
+   find src/storage/ -type d -exec chmod 777 {} +
+   find src/bootstrap/cache -type d -exec chmod 777 {} +
+   find src/database/ -type d -exec chmod 777 {} +
    ```
 
 6. Restart the container after setup:
@@ -148,7 +148,7 @@ Detailed API documentation is available via Swagger:
 
 ## 🧰 Development Notes
 
-- The Laravel source code is mounted from the local `html/` directory.
+- The Laravel source code is mounted from the local `src/` directory.
 - Code changes are automatically synced inside the container.
 - View logs in real-time using:
 
