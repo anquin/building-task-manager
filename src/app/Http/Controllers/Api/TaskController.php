@@ -195,22 +195,6 @@ class TaskController extends Controller
         return new TaskResource($task);
     }
 
-    /**
-     * @OA\Delete(
-     *     path="/api/tasks/{id}",
-     *     summary="Delete a task",
-     *     tags={"Tasks"},
-     *     security={{"bearerAuth": {}}},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         @OA\Schema(type="string", format="uuid")
-     *     ),
-     *     @OA\Response(response=204, description="Task deleted"),
-     *     @OA\Response(response=404, description="Task not found")
-     * )
-     */
     public function destroy(string $id)
     {
         $task = Task::findOrFail($id);

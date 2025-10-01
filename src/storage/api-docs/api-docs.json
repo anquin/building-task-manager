@@ -157,37 +157,6 @@
                     }
                 ]
             },
-            "delete": {
-                "tags": [
-                    "Tasks"
-                ],
-                "summary": "Delete a task",
-                "operationId": "d81cc7975ea62176b4ef8f74ed95168d",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Task deleted"
-                    },
-                    "404": {
-                        "description": "Task not found"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
             "patch": {
                 "tags": [
                     "Tasks"
